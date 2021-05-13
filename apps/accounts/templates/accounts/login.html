@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'accounts/css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="auth_message">
+        {% if form.errors %}
+            <b style="color:yellow;opacity:0.8">
+                {% for key, value in form.errors.items %}
+                    {% for error_text in value.data %}
+                        {{ error_text }}<br>
+                    {% endfor %}
+                {% endfor %}
+            </b>
+        {% else %}
+            Приветствуем вас! Для продолжения войдите или зарегистрируйтесь.
+        {% endif %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Вход</h1>
+        <input name="username" placeholder="Логин" required id="id_username">
+        <input name="password" placeholder="Пароль" type="password" required id="id_password">
+        <button id="auth">Войти</button>
+        <a id="register" href="{% url 'register' %}">Регистрация</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,34 @@
+body {
+    font-family:sans-serif;
+    color:white;
+}
+
+h1 {
+    font-weight:bold;
+}
+
+#caption {
+	font-size:160%;
+	font-size:210%;
+	font-weight:bold;
+}
+
+span {
+	cursor:default;
+	display:block;
+	width:94%;
+	font-size:120%;
+	font-weight:bold;
+}
+
+@media (min-width: 1000px) {
+    img {
+        width: 300px;
+    }
+}
+
+@media (max-width: 1000px) {
+    img {
+        width: 150px;
+    }
+}

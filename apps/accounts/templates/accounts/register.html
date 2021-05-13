@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'accounts/css/auth.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div id="auth_message">
+        {% if form.errors %}
+            <b style="color:yellow;opacity:0.8">
+                {% for key, value in form.errors.items %}
+                    {% for error_text in value.data %}
+                        {{ error_text }}<br>
+                    {% endfor %}
+                {% endfor %}
+            </b>
+        {% else %}
+            Создайте аккаунт - это просто!
+        {% endif %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Регистрация</h1>
+        <input id="username" placeholder="Логин" name="username" required>
+        <input id="fio" placeholder="ФИО" name="fio" required>
+        <input id="tel" placeholder="Телефон" name="phone_number" required>
+        <input id="password" placeholder="Пароль" type="password" name="password" required>
+        <select name="gender" required>
+            <option value="M">Мужской</option>
+            <option value="G">Женский</option>
+            <option value="U">Не выбрано</option>
+        </select>
+        <button id="auth" type="sumbit">Зарегистрироваться</button>
+        <a id="link_login" href="{% url 'login' %}">Вход</a>
+    </form>
+{% endblock %}

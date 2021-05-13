@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'services/css/service_create.css' %}">
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'services/js/service_create.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div id="service_message">
+        {% if form.errors %}
+            <b style="color:yellow;opacity:0.8">
+                {% for key, value in form.errors.items %}
+                    {% for error_text in value.data %}
+                        {{ error_text }}<br>
+                    {% endfor %}
+                {% endfor %}
+            </b>
+        {% else %}
+            Закажите услугу - это просто!
+        {% endif %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <h1>Заказать услугу</h1>
+        <div class="mx-3 label">Вебсайт:</div>
+        <div class="d-flex justify-content-center mb-3">
+            <select id="id_website" name="website" class="col-10" required>
+                {% for id, name in form.website.field.choices %}
+                    <option value="{{ id }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mx-3 label">Тип услуги:</div>
+        <div class="d-flex justify-content-center mb-3">
+            <select id="id_type" name="type" class="col-10" required multiple></select>
+        </div>
+        <div class="mx-3 label">Специалист:</div>
+        <div class="d-flex justify-content-center mb-3">
+            <select id="id_specialist" name="specialist" class="col-10" required>
+                {% for id, name in form.specialist.field.choices %}
+                    <option value="{{ id }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mx-3 label">Количество:</div>
+        <div class="d-flex justify-content-center mb-3">
+            <input id="id_count" class="col-10" placeholder="Количество" name="count" required>
+        </div>
+
+        <div class="mx-3 label">Промо-код:</div>
+        <div class="d-flex justify-content-center mb-3">
+            <input id="id_promo_code" class="col-10" placeholder="Промо-код" name="promo_code">
+        </div>
+
+        <div class="mx-3 label label_itog">Итог:<span class="itog">0</span></div>
+
+        <div class="d-flex justify-content-center">
+            <button id="service_order" class="button_profile_form mt-4 mb-2 col-6" type="submit">Заказать услугу</button>
+        </div>
+    </form>
+{% endblock %}

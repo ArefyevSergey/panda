@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'accounts/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row mt-4 mb-4 justify-content-center">
+            <div class="block_content_profile col-6">
+                <h1>Имя пользователя</h1>
+                <div class="mt-3 mb-3">
+                    {{ user.profile.fio }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+            <div class="block_content_profile col-6">
+                <h1>Сменить почту</h1>
+                <div class="my-3">
+                    {% if user.email %}
+                        <span class="title_profile_content">Текущая почта:</span> {{ user.email }}
+                    {% endif %}
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-email">Новая почта:</div>
+                    <input id="email" class="col-12" placeholder="Почта" name="email" required>
+                    {% if email_change_form.email.errors  %}
+                        {% for error in email_change_form.email.errors %}
+                            <span class="profile_error_message">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="d-flex justify-content-center">
+                        <button class="button_profile_form mt-4 mb-2 col-6" type="submit" name="email-change">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+            <div class="block_content_profile col-6">
+                <h1>Сменить пароль</h1>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-password">Текущий пароль:</div>
+                    <input id="old_password" class="col-12" placeholder="Текущий пароль" name="old_password" required>
+                    {% if password_change_form.old_password.errors %}
+                        {% for error in password_change_form.old_password.errors %}
+                            <span class="profile_error_message">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="form-password mt-2">Новый пароль:</div>
+                    <input id="new_password1" class="col-12" placeholder="Новый пароль" name="new_password1" required>
+                    {% if password_change_form.new_password1.errors  %}
+                        {% for error in password_change_form.new_password1.errors %}
+                            <span class="profile_error_message">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="form-password mt-2">Повторить новый пароль:</div>
+                    <input id="new_password2" class="col-12" placeholder="Повторить новый пароль" name="new_password2" required>
+                    {% if password_change_form.new_password2.errors  %}
+                        {% for error in password_change_form.new_password2.errors %}
+                            <span class="profile_error_message">{{ error }}</span>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="d-flex justify-content-center">
+                        <button class="button_profile_form mt-4 mb-2 col-6" type="submit" name="password-change">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+            <div class="block_content_profile col-10">
+                <h1>Услуги котрые пользователь заказывал ранее</h1>
+                {% if services  %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Вебсайт</th>
+                                <th scope="col">Тип услуги</th>
+                                <th scope="col">Специалист</th>
+                                <th scope="col">Количество</th>
+                                <th scope="col">Промо-код</th>
+                                <th scope="col">Итог</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for service in services %}
+                                <tr>
+                                    <th>{{ service.website.name }}</th>
+                                        <td>
+                                        {% for type in service.type.all %}
+                                            {{ type }},
+                                        {% endfor %}
+                                        </td>
+                                        <td>{{ service.specialist.last_name }} {{ service.specialist.first_name }}</td>
+                                        <td>{{ service.count }}</td>
+                                        <td>{{ service.promo_code }}</td>
+                                        <td>{{ service.sum }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="profile_error_message">У вас нет неодного заказаной услуги</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+            <div class="block_content_profile col-6">
+                <h1>Рандомно-сгенерированный промокод для друзей на скидку</h1>
+                {% if promo_codes  %}
+                    <div class="d-inline promo_code">Промо-код: </div>
+                    {% for promo_code in promo_codes %}
+                        <div class="d-inline">{{ promo_code.code }}</div>
+                    {% endfor %}
+                {% else %}
+                    <div class="profile_error_message">У вас нет неодного промокода</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+            <div class="block_content_profile col-6">
+                <div class="d-flex justify-content-center">
+                    <button class="button_profile_form exit my-4 col-6" onclick="window.location.href='/account/logout'">Выйти</button>
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="row mb-4 justify-content-center">-->
+<!--            <div class="block_content_profile col-6">-->
+<!--                <h1>Реферальная ссылка на сайт</h1>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+{% endblock %}
