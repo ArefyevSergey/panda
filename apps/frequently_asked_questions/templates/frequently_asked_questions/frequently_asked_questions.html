@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'frequently_asked_questions/css/frequently_asked_questions.css' %}">
+{% endblock %}
 
 {% block content %}
+
+<div class="container">
+    <br>
+    {% for faq in object_list  %}
+        <div class="row mb-5 faq_block">
+            <div class="col-12 mb-3 question">
+                {{ faq.question | safe }}
+            </div>
+            <div class="col-12 answer">
+                {{ faq.answer | safe }}
+            </div>
+        </div>
+    {% endfor %}
+</div>
 
 {% endblock %}

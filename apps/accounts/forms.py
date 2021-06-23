@@ -61,6 +61,7 @@ class ProfileForm(forms.ModelForm):
         'not_validation_phone_number_pattern': 'Телефоный номер должен иметь формат "+71234567890"',
         'not_validation_gender_pattern': 'Указан неизвестный пол',
         'username_already_exists': 'Пользователь с таким логином уже зарегистрирован',
+        'not_validation_consent_processing_personal_data': 'Укажите согласие на обработку персональных данных'
     }
 
     class Meta:

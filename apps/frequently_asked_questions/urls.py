@@ -1,8 +1,7 @@
 from django.urls import path
-from django.views.generic import TemplateView
 
+from apps.frequently_asked_questions.views import FAQListView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='frequently_asked_questions/frequently_asked_questions.html'),
-         name='frequently_asked_questions'),
+    path('', FAQListView.as_view(), name='frequently_asked_questions'),
 ]

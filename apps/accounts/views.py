@@ -1,4 +1,3 @@
-from django import forms
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth import update_session_auth_hash
@@ -12,6 +11,7 @@ from django.views.generic.base import View
 from django.views.generic.edit import FormView
 
 from .forms import LoginForm, ProfileForm, EmailChangeForm
+from ..about.models import Contacts
 from ..services.models import Services, PromoCode
 
 
@@ -19,6 +19,11 @@ class RegisterFormView(FormView):
     form_class = ProfileForm
     success_url = "/account/login/"
     template_name = "accounts/register.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contact'] = Contacts.objects.all()[0]
+        return context
 
     def form_valid(self, form):
         form.save()
@@ -29,6 +34,11 @@ class LoginFormView(FormView):
     form_class = LoginForm
     template_name = "accounts/login.html"
     success_url = "/"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contact'] = Contacts.objects.all()[0]
+        return context
 
     def form_valid(self, form):
         user = form.get_user()
@@ -51,6 +61,7 @@ class ProfileView(DetailView):
         context = super().get_context_data(**kwargs)
         context['services'] = Services.objects.filter(user=self.request.user).annotate(sum=Sum('type__price') * F('count'))
         context['promo_codes'] = PromoCode.objects.filter(user=self.request.user)
+        context['contact'] = Contacts.objects.all()[0]
         return context
 
     def post(self, request, *args, **kwargs):

@@ -1,5 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+{% endblock %}
 
 {% block content %}
+<div class="container">
+    <h1>Главная</h1>
+    <div class="row mt-4 contact_block">
+        <div class="mb-2 d-flex justify-content-center">
+            РАСЧИТАТЬ СТОЙМОСТЬ УСЛУГИ?
+        </div>
+        <div class="mb-2 d-flex justify-content-center">
+            <button type="button" class="btn btn-danger">
+                <a class="nav-link a_main" href="{% url 'order_services' %}">РАСЧИТАТЬ!</a>
+            </button>
+        </div>
+    </div>
+    <div class="row mt-4 contact_block">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for slider in sliders %}
+                    <div class="carousel-item {% if slider == sliders.first %} active {% endif %}">
+                        <img src="{{ slider.img.url }}"
+                             class="d-block"
+                             alt="{{ slider.alt }}"
+                             style="width: 75%; height: 480px;">
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 body {
     font-family:sans-serif;
     color:white;
+    font-size:130%;
 }
 
 form {
@@ -8,9 +9,18 @@ form {
 	min-height:45%;
 	margin-top:3%;
 	margin-left:36%;
-	position:absolute;
 	border-radius:6px;
 	background-color:rgba(30,30,30,0.4)
+}
+
+.consent_processing_personal_data {
+	font-size:80%;
+	display:block;
+	color:white;
+	margin-top:5%;
+	width:60%;
+	margin-left:20%;
+	height:5%;
 }
 
 h1 {
@@ -87,4 +97,12 @@ select {
 	background:rgba(30,30,30,0.5);
 	border:1px solid black;
 	color:white;
+}
+
+.consent_processing_personal_data a {
+    color:white;
+}
+
+.consent_processing_personal_data a:hover {
+    color:#007bff;
 }

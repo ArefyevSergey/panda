@@ -31,6 +31,11 @@
             <option value="G">Женский</option>
             <option value="U">Не выбрано</option>
         </select>
+        <div class="consent_processing_personal_data">
+            <a href="{% static 'docs/consent_processing_personal_data.pdf' %}" target="_blank">
+                Нажимая на кнопку зарегистрироваться вы соглашаетесь на обработку персональных данных
+            </a>
+        </div>
         <button id="auth" type="sumbit">Зарегистрироваться</button>
         <a id="link_login" href="{% url 'login' %}">Вход</a>
     </form>

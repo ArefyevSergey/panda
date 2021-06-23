@@ -1,0 +1,26 @@
+body {
+    font-family:sans-serif;
+    color:white;
+    font-size:130%;
+}
+
+h1 {
+    color: rgba(0,0,0,.55);
+}
+
+.contact_block {
+	border-radius:6px;
+	background-color:rgba(30,30,30,0.4)
+}
+
+.address {
+
+}
+
+.tel {
+
+}
+
+.email {
+
+}

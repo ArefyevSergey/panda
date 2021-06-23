@@ -1,6 +1,7 @@
 body {
     font-family:sans-serif;
     color:white;
+    font-size:130%;
 }
 
 form {
@@ -8,7 +9,6 @@ form {
 	min-height:45%;
 	margin-top:3%;
 	margin-left:36%;
-	position:absolute;
 	border-radius:6px;
 	background-color:rgba(30,30,30,0.4)
 }
@@ -78,4 +78,13 @@ select {
 .label {
     font-size:130%;
     font-weight:bold;
+}
+
+.list-service a {
+    font-family:sans-serif;
+    color:white;
+}
+
+.list-service a:hover {
+    color:#007bff;
 }

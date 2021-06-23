@@ -1,7 +1,7 @@
 from django.urls import path
-from django.views.generic import TemplateView
 
+from apps.about.views import AboutView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='about/about.html'), name='about'),
+    path('', AboutView.as_view(), name='about'),
 ]

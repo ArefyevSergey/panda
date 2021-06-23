@@ -15,7 +15,7 @@
 </head>
 <body>
     <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark"><!-- navbar-dark bg-dark-->
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #329900; opacity: 0.8">
             <div class="container-fluid">
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav ms-auto">
@@ -32,7 +32,7 @@
                             <a class="nav-link" href="{% url 'frequently_asked_questions' %}">F.A.Q.</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'about' %}">О нас</a>
+                            <a class="nav-link" href="{% url 'about' %}">Контакты</a>
                         </li>
                         <li class="nav-item auth">
                             {% if user.is_authenticated %}
@@ -51,9 +51,34 @@
         </nav>
     </header>
 
-    {% block content %} {% endblock %}
+    <div class="base_content">{% block content %} {% endblock %}</div>
 
-    <footer></footer>
+    <footer class="footer mt-1">
+      <div class="copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 my-auto copyright_name">
+                        <span>ИП Усенко《ПАНДА》2021г.</span>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="copyright-menu">
+                            <ul>
+                                <li>
+                                    <a href="#">{{ contact.address | safe }}</a>
+                                </li>
+                                <li>
+                                    <a href="#">{{ contact.tel | safe }}</a>
+                                </li>
+                                <li>
+                                    <a href="#">MAIL: {{ contact.email | safe }}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

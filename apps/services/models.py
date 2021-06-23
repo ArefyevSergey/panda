@@ -5,10 +5,15 @@ from django.db import models
 class Specialists(models.Model):
     first_name = models.CharField(max_length=50, verbose_name='Имя')
     last_name = models.CharField(max_length=50, verbose_name='Фамилия')
+    email = models.EmailField(verbose_name='Почта', default='arefyev.sergey@mail.ru')
     post = models.CharField(max_length=256, verbose_name='Должность')
 
     def __str__(self):
         return f'{self.last_name} {self.first_name}'
+
+    class Meta:
+        verbose_name = 'Специалист'
+        verbose_name_plural = 'Специалисты'
 
 
 class PromoCode(models.Model):
@@ -17,6 +22,10 @@ class PromoCode(models.Model):
 
     def __str__(self):
         return self.code
+
+    class Meta:
+        verbose_name = 'Промо-код'
+        verbose_name_plural = 'Промо-коды'
 
 
 class Website(models.Model):
@@ -27,6 +36,10 @@ class Website(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Сайт'
+        verbose_name_plural = 'Сайты'
+
 
 class ServiceType(models.Model):
     name = models.CharField(max_length=255)
@@ -35,7 +48,11 @@ class ServiceType(models.Model):
                                 help_text='Стоимость одной единицы')
 
     def __str__(self):
-        return self.name
+        return f'{self.website.name} {self.name}'
+
+    class Meta:
+        verbose_name = 'Тип услуги'
+        verbose_name_plural = 'Типы услуг'
 
 
 class Services(models.Model):
@@ -45,3 +62,7 @@ class Services(models.Model):
     count = models.IntegerField(verbose_name='Количество услуг')
     promo_code = models.CharField(max_length=100, blank=False, verbose_name='Промо-код')
     user = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Пользователь')
+
+    class Meta:
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'

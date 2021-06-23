@@ -9,6 +9,7 @@ class ServiceForm(forms.ModelForm):
 
     error_messages = {
         'not_prom_code': 'Нет такого промо-кода',
+        'user_not_register': 'Заказать услуги могут только авторизованные пользователи'
     }
 
     class Meta:

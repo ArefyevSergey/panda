@@ -1,0 +1,18 @@
+body {
+    font-family:sans-serif;
+    color:white;
+    font-size:130%;
+}
+
+.faq_block {
+	border-radius:6px;
+	background-color:rgba(30,30,30,0.4)
+}
+
+.question {
+	font-weight:bold;
+}
+
+.answer {
+
+}
